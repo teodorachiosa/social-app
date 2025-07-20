@@ -302,6 +302,7 @@ func serve(cctx *cli.Context) error {
 	e.GET("/support/copyright", server.WebGeneric)
 	e.GET("/intent/compose", server.WebGeneric)
 	e.GET("/intent/verify-email", server.WebGeneric)
+	e.GET("/intent/age-assurance", server.WebGeneric)
 	e.GET("/messages", server.WebGeneric)
 	e.GET("/messages/:conversation", server.WebGeneric)
 
@@ -604,7 +605,7 @@ type IPCCRequest struct {
 }
 type IPCCResponse struct {
 	CC               string `json:"countryCode"`
-	AgeRestrictedGeo string `json:"isAgeRestrictedGeo"`
+	AgeRestrictedGeo bool   `json:"isAgeRestrictedGeo,omitempty"`
 }
 
 func (srv *Server) WebIpCC(c echo.Context) error {
